@@ -1,0 +1,398 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://amazon-image-system.local/schemas/image-job.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.1"
+    },
+    "job_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "INIT",
+        "COLLECTING",
+        "ANALYZING",
+        "VALIDATING",
+        "WAITING_FOR_CONFIRMATION",
+        "LOCKED",
+        "PLANNING",
+        "PROMPT_READY",
+        "GENERATING",
+        "QC",
+        "REVISION",
+        "FINAL",
+        "CANCELLED"
+      ]
+    },
+    "requirements": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "$ref": "#/$defs/fact"
+        },
+        "marketplace": {
+          "$ref": "#/$defs/fact"
+        },
+        "image_type": {
+          "$ref": "#/$defs/fact"
+        },
+        "material_affects_visual": {
+          "type": "boolean"
+        },
+        "source_documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "listing",
+                  "equivalent_product_brief"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "kind",
+              "path",
+              "sha256"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "platform",
+        "marketplace",
+        "image_type",
+        "material_affects_visual",
+        "source_documents"
+      ],
+      "additionalProperties": false
+    },
+    "product": {
+      "$ref": "https://amazon-image-system.local/schemas/product.schema.json"
+    },
+    "plan": {
+      "$ref": "https://amazon-image-system.local/schemas/image-plan.schema.json"
+    },
+    "generation": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "const": "openai"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quality": {
+          "enum": [
+            "high"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "default",
+            "current_job"
+          ]
+        },
+        "confirmed": {
+          "type": "boolean"
+        },
+        "confirmation": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "enum": [
+                    "确认",
+                    "确认生成",
+                    "开始生成",
+                    "可以生成"
+                  ]
+                },
+                "actor": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "at": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "digest": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "native_model_unverified_ack": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "text",
+                "actor",
+                "at",
+                "digest",
+                "native_model_unverified_ack"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "capability": {
+          "type": "object",
+          "properties": {
+            "native_available": {
+              "type": "boolean"
+            },
+            "selectable_model": {
+              "type": "boolean"
+            },
+            "available_models": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "evidence": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "native_available",
+            "selectable_model",
+            "available_models",
+            "evidence"
+          ],
+          "additionalProperties": false
+        },
+        "max_revisions": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "quality",
+        "scope",
+        "confirmed",
+        "confirmation",
+        "capability",
+        "max_revisions"
+      ],
+      "additionalProperties": false
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "to": {
+            "enum": [
+              "INIT",
+              "COLLECTING",
+              "ANALYZING",
+              "VALIDATING",
+              "WAITING_FOR_CONFIRMATION",
+              "LOCKED",
+              "PLANNING",
+              "PROMPT_READY",
+              "GENERATING",
+              "QC",
+              "REVISION",
+              "FINAL",
+              "CANCELLED"
+            ]
+          },
+          "event": {
+            "type": "string",
+            "minLength": 1
+          },
+          "at": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "event",
+          "at"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "prompts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "confirmation_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "repair_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "confirmation_digest",
+          "repair_of"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "confirmation_digest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          },
+          "reported_model": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "recorded_at": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "confirmation_digest",
+          "revision",
+          "reported_model",
+          "recorded_at"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "qc": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "https://amazon-image-system.local/schemas/qc-result.schema.json"
+      }
+    },
+    "active_images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "job_id",
+    "sku",
+    "state",
+    "requirements",
+    "product",
+    "plan",
+    "generation",
+    "history",
+    "prompts",
+    "artifacts",
+    "qc",
+    "active_images"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "properties": {
+        "value": {},
+        "status": {
+          "enum": [
+            "CONFIRMED",
+            "INFERRED",
+            "MISSING",
+            "CONFLICT",
+            "LOCKED"
+          ]
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "sources",
+        "note"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
