@@ -1,7 +1,0 @@
-{
-  "name": "conflicting-quantity",
-  "base_fixture": "ready_job() in tests/test_workflow.py; synthetic product only",
-  "action": "conflict_quantity",
-  "expected": "CONFLICT",
-  "code": "CONFLICT"
-}

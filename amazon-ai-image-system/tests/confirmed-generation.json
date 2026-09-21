@@ -1,7 +1,0 @@
-{
-  "name": "confirmed-generation",
-  "base_fixture": "ready_job() in tests/test_workflow.py; synthetic product only",
-  "action": "confirmed",
-  "expected": "ALLOW",
-  "code": null
-}

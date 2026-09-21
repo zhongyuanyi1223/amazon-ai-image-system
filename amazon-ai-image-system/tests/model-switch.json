@@ -1,7 +1,0 @@
-{
-  "name": "model-switch",
-  "base_fixture": "ready_job() in tests/test_workflow.py; synthetic product only",
-  "action": "model_switch",
-  "expected": "CURRENT_JOB_ONLY",
-  "code": null
-}

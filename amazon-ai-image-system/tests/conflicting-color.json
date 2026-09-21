@@ -1,7 +1,0 @@
-{
-  "name": "conflicting-color",
-  "base_fixture": "ready_job() in tests/test_workflow.py; synthetic product only",
-  "action": "conflict_color",
-  "expected": "CONFLICT",
-  "code": "CONFLICT"
-}

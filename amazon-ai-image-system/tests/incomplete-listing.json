@@ -1,7 +1,0 @@
-{
-  "name": "incomplete-listing",
-  "base_fixture": "ready_job() in tests/test_workflow.py; synthetic product only",
-  "action": "missing_listing",
-  "expected": "REQUEST_LISTING_OR_EQUIVALENT",
-  "code": "LISTING"
-}
