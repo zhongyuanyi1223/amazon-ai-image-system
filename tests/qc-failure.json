@@ -1,0 +1,7 @@
+{
+  "name": "qc-failure",
+  "base_fixture": "ready_job() in tests/test_workflow.py; synthetic product only",
+  "action": "qc_failure",
+  "expected": "REVISION",
+  "code": null
+}

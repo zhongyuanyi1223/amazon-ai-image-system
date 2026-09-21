@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.1",
+  "job_id": "new-job",
+  "sku": "new-sku",
+  "state": "INIT",
+  "requirements": {
+    "platform": {
+      "value": "Amazon",
+      "status": "CONFIRMED",
+      "sources": [
+        "operator"
+      ],
+      "note": ""
+    },
+    "marketplace": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "image_type": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "material_affects_visual": true,
+    "source_documents": []
+  },
+  "product": {
+    "product_identity": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "structure": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "material": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "color": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "quantity": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "dimensions": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "accessories": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "supported_claims": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "immutable_features": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "forbidden_changes": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    },
+    "reference_images": {
+      "value": null,
+      "status": "MISSING",
+      "sources": [],
+      "note": ""
+    }
+  },
+  "plan": {
+    "version": 1,
+    "images": [
+      {
+        "image_id": "01-main",
+        "type": "main",
+        "buyer_question": "实际收到什么产品？",
+        "evidence": [],
+        "message": "准确展示实际销售产品",
+        "visible_copy": "",
+        "composition": "完整展示产品，保持真实比例",
+        "scene": "纯白背景",
+        "constraints": [
+          "不添加未包含配件"
+        ],
+        "width": 1600,
+        "height": 1600
+      }
+    ]
+  },
+  "generation": {
+    "provider": "openai",
+    "model": "gpt-image-2",
+    "quality": "high",
+    "scope": "default",
+    "confirmed": false,
+    "confirmation": null,
+    "capability": {
+      "native_available": false,
+      "selectable_model": false,
+      "available_models": [],
+      "evidence": ""
+    },
+    "max_revisions": 3
+  },
+  "history": [
+    {
+      "from": null,
+      "to": "INIT",
+      "event": "created",
+      "at": "not-started"
+    }
+  ],
+  "prompts": {},
+  "artifacts": {},
+  "qc": {},
+  "active_images": []
+}

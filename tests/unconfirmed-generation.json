@@ -1,0 +1,7 @@
+{
+  "name": "unconfirmed-generation",
+  "base_fixture": "ready_job() in tests/test_workflow.py; synthetic product only",
+  "action": "unconfirmed",
+  "expected": "BLOCKED",
+  "code": "UNCONFIRMED"
+}

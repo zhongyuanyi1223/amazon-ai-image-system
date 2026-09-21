@@ -1,0 +1,68 @@
+{
+  "product_identity": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "structure": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "material": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "color": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "quantity": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "dimensions": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "accessories": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "supported_claims": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "immutable_features": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "forbidden_changes": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  },
+  "reference_images": {
+    "value": null,
+    "status": "MISSING",
+    "sources": [],
+    "note": ""
+  }
+}

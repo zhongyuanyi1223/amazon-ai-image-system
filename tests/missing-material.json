@@ -1,0 +1,7 @@
+{
+  "name": "missing-material",
+  "base_fixture": "ready_job() in tests/test_workflow.py; synthetic product only",
+  "action": "missing_material",
+  "expected": "BLOCKED",
+  "code": "P0"
+}

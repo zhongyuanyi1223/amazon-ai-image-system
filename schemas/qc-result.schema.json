@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://amazon-image-system.local/schemas/qc-result.schema.json",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "image_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "asset_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "confirmation_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "enum": [
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewed_at": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checks": {
+      "type": "object",
+      "properties": {
+        "product_consistency": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "physical_logic": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "amazon_rules": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "copy_accuracy": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "technical_quality": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        }
+      },
+      "required": [
+        "product_consistency",
+        "physical_logic",
+        "amazon_rules",
+        "copy_accuracy",
+        "technical_quality"
+      ],
+      "additionalProperties": false
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "severity": {
+            "enum": [
+              "critical",
+              "major",
+              "minor"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "repair_instruction": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "severity",
+          "type",
+          "description",
+          "repair_instruction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "job_id",
+    "image_id",
+    "asset_sha256",
+    "confirmation_digest",
+    "status",
+    "reviewer",
+    "reviewed_at",
+    "checks",
+    "issues"
+  ],
+  "additionalProperties": false
+}
